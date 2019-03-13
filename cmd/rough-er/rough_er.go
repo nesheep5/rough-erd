@@ -23,8 +23,8 @@ func main() {
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name: "database, d",
-					Value: "MySQL",
-					Usage: "use Database.",
+					Value: "mysql",
+					Usage: "database type",
 				},
 				cli.StringFlag{
 					Name: "user, u",
