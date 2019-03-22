@@ -1,2 +1,2 @@
 # rough-erd
-make rough ER diagram.
+This tool creates a rough ER diagram.
