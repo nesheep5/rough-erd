@@ -12,7 +12,7 @@ func main() {
 
 	app := cli.NewApp()
 	app.Name = "rough-erd"
-	app.Usage = "make rough ER diagram."
+	app.Usage = "This tool creates a rough ER diagram."
 	app.Version = "v1.0.0"
 
 	app.Commands = []cli.Command{
