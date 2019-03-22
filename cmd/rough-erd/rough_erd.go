@@ -11,7 +11,7 @@ import (
 func main() {
 
 	app := cli.NewApp()
-	app.Name = "rough-er"
+	app.Name = "rough-erd"
 	app.Usage = "make rough ER diagram."
 	app.Version = "v1.0.0"
 
