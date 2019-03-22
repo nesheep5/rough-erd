@@ -1,4 +1,4 @@
-package rough_er
+package rough_erd
 
 import "sort"
 
