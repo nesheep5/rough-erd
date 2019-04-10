@@ -23,7 +23,6 @@ type Option struct {
 }
 
 func Run(option *Option) error {
-	fmt.Printf("run!!! option: %+v\n", option)
 	conn := &ConnectInfo{
 		User:     option.User,
 		Password: option.Password,

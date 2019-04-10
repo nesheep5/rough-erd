@@ -34,7 +34,7 @@ func MysqlDatabase(c *ConnectInfo) (Database, error) {
 		},
 	}
 	con := config.Config.FormatDSN()
-	fmt.Println(con)
+	fmt.Printf("connection: %s\n", con)
 	db, err := sql.Open("mysql", con)
 
 	if err != nil {
