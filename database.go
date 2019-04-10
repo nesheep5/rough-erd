@@ -30,11 +30,9 @@ type ConnectInfo struct {
 }
 
 func CreateDatabase(dbType string, conn *ConnectInfo) (Database, error) {
-	fmt.Println("create DB...")
 	switch dbType {
 	case "mysql":
 		return MysqlDatabase(conn)
 	}
-
-	return nil, fmt.Errorf("")
+	return nil, fmt.Errorf("dbtype is invalid. type: %s", dbType)
 }

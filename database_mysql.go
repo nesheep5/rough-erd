@@ -41,55 +41,9 @@ func MysqlDatabase(c *ConnectInfo) (Database, error) {
 		return nil, errors.New(fmt.Sprintf("MySQLConfig#Database: fail to open pmysql connection. %s", err.Error()))
 	}
 	fmt.Println("created MySQL DB")
-	var i string
-	db.QueryRow("show tables;").Scan(&i)
-	fmt.Println(i)
 	return &Mysql{db: db, config: config}, nil
-
 }
 
-//func (config *MySQLConfig) Database() (Database, error) {
-//	db, err := sql.Open("mysql", config.String())
-//	if err != nil {
-//		return nil, errors.New(fmt.Sprintf("MySQLConfig#Database: fail to open pmysql connection. %s", err.Error()))
-//	}
-//	return &mysql{db: db, config: config}, nil
-//}
-//
-//func (m *mysql) tableDefinition(schemaName string, tableName string) (string, error) {
-//	var definition string
-//	err := m.db.QueryRow(fmt.Sprintf("SHOW CREATE TABLE %s.%s", schemaName, tableName)).Scan(&tableName, &definition)
-//	if err != nil {
-//		return "", err
-//	}
-//	reg := regexp.MustCompile(`AUTO_INCREMENT=[0-9]+ `)
-//	return reg.ReplaceAllString(definition, ""), nil
-//}
-//
-//func (m *mysql) viewDefinition(schemaName string, tableName string) (string, error) {
-//	var definition string
-//	err := m.db.QueryRow("SELECT VIEW_DEFINITION FROM information_schema.VIEWS WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?", schemaName, tableName).Scan(&definition)
-//	if err != nil {
-//		return "", err
-//	}
-//	definition = fmt.Sprintf("create or replace view %s AS %s", tableName, definition)
-//	for _, phrase := range []string{
-//		"select",
-//		"from",
-//		"union",
-//		"where",
-//		"order by",
-//		"group by",
-//		"having",
-//		"procedure",
-//		"for update",
-//		"lock in share mode",
-//	} {
-//		definition = strings.Replace(definition, phrase, "\n  "+phrase, -1)
-//	}
-//	return definition, nil
-//}
-//
 func (m *Mysql) columns(schemaName string, tableName string) ([]*Column, error) {
 	q := `SELECT ORDINAL_POSITION, COLUMN_NAME, COLUMN_TYPE, COALESCE(COLUMN_DEFAULT, 'null'), IS_NULLABLE, COLUMN_COMMENT
          FROM information_schema.COLUMNS
