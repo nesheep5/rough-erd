@@ -22,7 +22,7 @@ type MySQLConfig struct {
 }
 
 func MysqlDatabase(c *ConnectInfo) (Database, error) {
-	fmt.Println("create MySQL DB...")
+	fmt.Println("connect MySQL DB...")
 	config := &MySQLConfig{
 		Config: &mysql_driver.Config{
 			User:                 c.User,
@@ -34,13 +34,13 @@ func MysqlDatabase(c *ConnectInfo) (Database, error) {
 		},
 	}
 	con := config.Config.FormatDSN()
-	fmt.Printf("connection: %s\n", con)
+	fmt.Printf("  connection param: %s\n", con)
 	db, err := sql.Open("mysql", con)
 
 	if err != nil {
 		return nil, errors.New(fmt.Sprintf("MySQLConfig#Database: fail to open pmysql connection. %s", err.Error()))
 	}
-	fmt.Println("created MySQL DB")
+	fmt.Println("connected MySQL DB")
 	return &Mysql{db: db, config: config}, nil
 }
 

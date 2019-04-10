@@ -40,9 +40,9 @@ func Run(option *Option) error {
 		return err
 	}
 	uml := makePruntUml(tables)
-	fmt.Println("-----------------------------")
-	fmt.Println(uml)
-	fmt.Println("-----------------------------")
+	//fmt.Println("-----------------------------")
+	//fmt.Println(uml)
+	//fmt.Println("-----------------------------")
 
 	encoded := encodeAsTextFormat([]byte(uml))
 
