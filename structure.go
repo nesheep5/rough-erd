@@ -1,6 +1,11 @@
 package rough_erd
 
-import "sort"
+import (
+	"sort"
+	"strings"
+
+	"github.com/jinzhu/inflection"
+)
 
 type Schema struct {
 	Name   string
@@ -15,6 +20,37 @@ type Table struct {
 	Columns    []*Column
 	Memo       string
 	Definition string
+}
+
+func (t *Table) IDColumns() []string {
+	s := make([]string, 0)
+	for _, c := range t.Columns {
+		n := strings.ToLower(c.Name)
+		if strings.HasSuffix(n, "id") {
+			s = append(s, n)
+		}
+	}
+	return s
+}
+
+func (t *Table) RelayedTables() []*RelayedTable {
+	s := make([]*RelayedTable, 0)
+	for _, c := range t.Columns {
+		n := strings.ToLower(c.Name)
+		if strings.HasSuffix(n, "_id") {
+			idTrimName := n[:len(n)-3]
+			s = append(s, &RelayedTable{
+				TableName: inflection.Plural(idTrimName),
+				IDName:    n,
+			})
+		}
+	}
+	return s
+}
+
+type RelayedTable struct {
+	TableName string
+	IDName    string
 }
 
 type Column struct {

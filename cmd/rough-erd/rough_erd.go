@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
+
+	"github.com/nesheep5/rough-erd"
 
 	"github.com/urfave/cli"
 )
@@ -22,26 +23,41 @@ func main() {
 			Usage:   "make ER diagram.",
 			Flags: []cli.Flag{
 				cli.StringFlag{
-					Name: "database, d",
+					Name:  "databasetype",
 					Value: "mysql",
 					Usage: "database type",
 				},
 				cli.StringFlag{
-					Name: "user, u",
+					Name:  "user, u",
 					Usage: "database user",
 				},
 				cli.StringFlag{
-					Name: "password, p",
+					Name:  "password, p",
 					Usage: "database password",
 				},
-				cli.StringFlag{
-					Name: "port, P",
+				cli.IntFlag{
+					Name:  "port, P",
 					Usage: "database port",
+				},
+				cli.StringFlag{
+					Name:  "protocol",
+					Usage: "database protocol",
+				},
+				cli.StringFlag{
+					Name:  "name, n",
+					Usage: "database name",
 				},
 			},
 			Action: func(c *cli.Context) error {
-				fmt.Println("run!!!")
-				return nil
+				o := &rough_erd.Option{
+					Database: c.String("databasetype"),
+					User:     c.String("user"),
+					Password: c.String("password"),
+					Port:     c.Int("port"),
+					Protocol: c.String("protocol"),
+					Name:     c.String("name"),
+				}
+				return rough_erd.Run(o)
 			},
 		},
 	}

@@ -1,19 +1,19 @@
 package rough_erd
 
 import (
+	"fmt"
+
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
-	"strings"
 )
 
 type Database interface {
-	Schemas() ([]*Schema, error)
+	Tables(schemaName string) ([]*Table, error)
 	Close()
 }
 
 type DatabaseConfig interface {
 	String() string
-	Database() (Database, error)
 	Names() map[string]string
 }
 
@@ -26,27 +26,15 @@ type ConnectInfo struct {
 	Password string
 	Port     int
 	Protocol string
-	Socket   string
+	DBName   string
 }
 
-func (config *DatabaseSchemaConfig) Names() map[string]string {
-	var names = map[string]string{}
-	for _, name := range config.Schemas {
-		var alias string
-		tmp := strings.Split(name, "@")
-		if len(tmp) > 1 {
-			name = tmp[0]
-			alias = tmp[1]
-
-		} else {
-			alias = name
-		}
-		names[alias] = name
+func CreateDatabase(dbType string, conn *ConnectInfo) (Database, error) {
+	fmt.Println("create DB...")
+	switch dbType {
+	case "mysql":
+		return MysqlDatabase(conn)
 	}
-	return names
-}
 
-func MakeDBConfig(typec ConnectInfo) DatabaseConfig {
-
-	return nil
+	return nil, fmt.Errorf("")
 }
