@@ -55,7 +55,7 @@ OPTIONS:
 ```
 
 ## Example
-Show [Example Dir](https://github.com/nesheep5/rough-erd/tree/master/example).
+Show [Example dir](https://github.com/nesheep5/rough-erd/tree/master/example).
 ### Run TestDB
 ```bash
 > cd $[GOPATH]/src/github.com/nesheep5/rough-erd/example
