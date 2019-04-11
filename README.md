@@ -1,13 +1,15 @@
 # rough-erd
 This tool creates a rough ER diagram.
+Tables related by ID. (Not use FOREIGN KEY)
+![uml.png](https://github.com/nesheep5/rough-erd/blob/master/example/uml.png)
 
 ## Install
-```
+```bash
 go get -u github.com/nesheep5/rough-erd
 ```
 
 ## Usage
-```
+```bash
 NAME:
    rough-erd - This tool creates a rough ER diagram.
 
@@ -26,7 +28,7 @@ GLOBAL OPTIONS:
    --version, -v  print the version
 ```
 ### make command
-```
+```bash
 NAME:
    rough_erd make - make ER diagram.
 
@@ -46,7 +48,7 @@ OPTIONS:
 
 ## Example
 ### Run TestDB
-```
+```bash
 > cd $[GOPATH]/src/github.com/nesheep5/rough-erd/example
 > docker-compose up -d --build 
 > mysql -P23306 -uroot -prough-erd --protocol=TCP -Dtest
@@ -81,7 +83,7 @@ mysql> show tables;
 ```
 
 ### make UML Text
-```
+```bash
 > rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o text
 -----------------------------
 
@@ -123,20 +125,22 @@ titles -- employees :employee_id
 ```
 
 ### make UML URL
-```
+```bash
 > rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o url
 Open → http://www.plantuml.com/plantuml/uml/UDgKaKsgmp0CXFSwXSW-5yWgY_Skq0i4WKKGM6wmrKKelNlfZnstAIvTppVZ6Gl6P1Jjf1vCp3F-7_1FQ8wamC74LkmSBnHDELZgy0pYu59hDh4kJu5rySULUH87cstQMvG2pHn_i6Lcto6HfoX5gCCswBxkCv8tODzZUGM7jr85gRu3XzUszRHlQHNMICpR6ccFPGrWvE1k1xu6003__qByi0K0
 ```
 Open → http://www.plantuml.com/plantuml/uml/UDgKaKsgmp0CXFSwXSW-5yWgY_Skq0i4WKKGM6wmrKKelNlfZnstAIvTppVZ6Gl6P1Jjf1vCp3F-7_1FQ8wamC74LkmSBnHDELZgy0pYu59hDh4kJu5rySULUH87cstQMvG2pHn_i6Lcto6HfoX5gCCswBxkCv8tODzZUGM7jr85gRu3XzUszRHlQHNMICpR6ccFPGrWvE1k1xu6003__qByi0K0
 
 ### make UML png
-```
+```bash
 > rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o png > uml.png
 > open uml.png
 ```
+![uml.png](https://github.com/nesheep5/rough-erd/blob/master/example/uml.png)
 
 ### make UML svg
 ```
 > rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o svg > uml.svg
 > open uml.svg -a /Applications/Google\ Chrome.app/
 ```
+![uml.svg](https://github.com/nesheep5/rough-erd/blob/master/example/uml.svg)
