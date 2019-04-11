@@ -1,6 +1,6 @@
 # rough-erd
-This tool creates a rough ER diagram.
-Tables related by ID. (Not use FOREIGN KEY)
+This tool creates a rough ER diagram.  
+This tool uses the ID to create a UML. (Not use FOREIGN KEY)
 ![uml.png](https://github.com/nesheep5/rough-erd/blob/master/example/uml.png)
 
 ## Install
