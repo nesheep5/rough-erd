@@ -49,9 +49,7 @@ func Run(option *Option) error {
 
 	switch option.Output {
 	case "text":
-		fmt.Println("-----------------------------")
 		fmt.Println(umlText)
-		fmt.Println("-----------------------------")
 	case "url":
 		encoded := encodeAsTextFormat([]byte(umlText))
 		fmt.Println("Open → " + PlantUmlServerURL + "/uml/" + encoded)
