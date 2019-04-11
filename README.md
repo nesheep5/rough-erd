@@ -6,7 +6,7 @@ This tool creates a rough ER diagram.
 go get -u github.com/nesheep5/rough-erd
 ```
 
-# Usage
+## Usage
 ```
 NAME:
    rough-erd - This tool creates a rough ER diagram.
@@ -25,16 +25,118 @@ GLOBAL OPTIONS:
    --help, -h     show help
    --version, -v  print the version
 ```
-
-# Example
+### make command
 ```
-> cd $[GOPATH]/src/github.com/nesheep5/rough-erd
-> docker-compose up -d --build
-> rough_erd  make -P 23306 -u root -p rough-erd -protocol tcp -n test
-connect MySQL DB...
-  connection param: root:rough-erd@tcp(127.0.0.1:23306)/test?maxAllowedPacket=0
-connected MySQL DB
-Open → http://www.plantuml.com/plantuml/uml/UDhYSYWkIImgAStDuIh9BCb9LGXEp2t8ILLm3NB9J4mlIipbIiqhoIofL51ApiyjICpBJ2rMKgZcoapXgeNBvAUbPIR3nI7gAkF1Ig1I2hgw2d3z2bP8IXnIyr90bWC2003__x3bBqm0
+NAME:
+   rough_erd make - make ER diagram.
 
+USAGE:
+   rough_erd make [command options] [arguments...]
+
+OPTIONS:
+   --dbtype value              database type (default: "mysql")
+   --user value, -u value      database user
+   --password value, -p value  database password
+   --host value, -H value      database host (default: "127.0.0.1")
+   --port value, -P value      database port (default: 3306)
+   --protocol value            database protocol
+   --name value, -n value      database name
+   --output value, -o value    output style [text, url, png, svg]  (default: "text")
 ```
-Open: http://www.plantuml.com/plantuml/uml/UDhYSYWkIImgAStDuIh9BCb9LGXEp2t8ILLm3NB9J4mlIipbIiqhoIofL51ApiyjICpBJ2rMKgZcoapXgeNBvAUbPIR3nI7gAkF1Ig1I2hgw2d3z2bP8IXnIyr90bWC2003__x3bBqm0
+
+## Example
+### Run TestDB
+```
+> cd $[GOPATH]/src/github.com/nesheep5/rough-erd/example
+> docker-compose up -d --build 
+> mysql -P23306 -uroot -prough-erd --protocol=TCP -Dtest
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 5.7.25 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| departments    |
+| dept_emp       |
+| dept_manager   |
+| employees      |
+| salaries       |
+| titles         |
++----------------+
+6 rows in set (0.00 sec)
+```
+
+### make UML Text
+```
+> rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o text
+-----------------------------
+
+@startuml
+title ER Diagram
+entity "departments" {
+id
+}
+entity "dept_emp" {
+id
+employee_id
+department_id
+}
+entity "dept_manager" {
+id
+employee_id
+department_id
+}
+entity "employees" {
+id
+}
+entity "salaries" {
+id
+employee_id
+}
+entity "titles" {
+id
+employee_id
+}
+dept_emp -- employees :employee_id
+dept_emp -- departments :department_id
+dept_manager -- employees :employee_id
+dept_manager -- departments :department_id
+salaries -- employees :employee_id
+titles -- employees :employee_id
+@enduml
+
+-----------------------------
+```
+
+### make UML URL
+```
+> rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o url
+Open → http://www.plantuml.com/plantuml/uml/UDgKaKsgmp0CXFSwXSW-5yWgY_Skq0i4WKKGM6wmrKKelNlfZnstAIvTppVZ6Gl6P1Jjf1vCp3F-7_1FQ8wamC74LkmSBnHDELZgy0pYu59hDh4kJu5rySULUH87cstQMvG2pHn_i6Lcto6HfoX5gCCswBxkCv8tODzZUGM7jr85gRu3XzUszRHlQHNMICpR6ccFPGrWvE1k1xu6003__qByi0K0
+```
+Open → http://www.plantuml.com/plantuml/uml/UDgKaKsgmp0CXFSwXSW-5yWgY_Skq0i4WKKGM6wmrKKelNlfZnstAIvTppVZ6Gl6P1Jjf1vCp3F-7_1FQ8wamC74LkmSBnHDELZgy0pYu59hDh4kJu5rySULUH87cstQMvG2pHn_i6Lcto6HfoX5gCCswBxkCv8tODzZUGM7jr85gRu3XzUszRHlQHNMICpR6ccFPGrWvE1k1xu6003__qByi0K0
+
+### make UML png
+```
+> rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o png > uml.png
+> open uml.png
+```
+
+### make UML svg
+```
+> rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o svg > uml.svg
+> open uml.svg -a /Applications/Google\ Chrome.app/
+```
