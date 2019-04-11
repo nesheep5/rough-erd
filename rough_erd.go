@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"compress/zlib"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 	"text/template"
 )
 
@@ -18,7 +20,10 @@ type Option struct {
 	Port     int
 	Protocol string
 	Name     string
+	Output   string
 }
+
+const PlantUmlServerURL = "http://www.plantuml.com/plantuml"
 
 func Run(option *Option) error {
 	conn := &ConnectInfo{
@@ -37,20 +42,39 @@ func Run(option *Option) error {
 	if err != nil {
 		return err
 	}
-	uml := makeUmlText(tables)
-	//fmt.Println("-----------------------------")
-	//fmt.Println(uml)
-	//fmt.Println("-----------------------------")
 
-	encoded := encodeAsTextFormat([]byte(uml))
+	umlText := makeUmlText(tables)
 
-	fmt.Println("Open → http://www.plantuml.com/plantuml/uml/" + encoded)
+	switch option.Output {
+	case "text":
+		fmt.Println("-----------------------------")
+		fmt.Println(umlText)
+		fmt.Println("-----------------------------")
+	case "url":
+		encoded := encodeAsTextFormat([]byte(umlText))
+		fmt.Println("Open → " + PlantUmlServerURL + "/umlText/" + encoded)
+	case "png":
+		encoded := encodeAsTextFormat([]byte(umlText))
+		resp, _ := http.Get(PlantUmlServerURL + "/png/" + encoded)
+		defer resp.Body.Close()
+
+		byteArray, _ := ioutil.ReadAll(resp.Body)
+		fmt.Println(string(byteArray))
+	case "svg":
+		encoded := encodeAsTextFormat([]byte(umlText))
+		resp, _ := http.Get(PlantUmlServerURL + "/svg/" + encoded)
+		defer resp.Body.Close()
+
+		byteArray, _ := ioutil.ReadAll(resp.Body)
+		fmt.Println(string(byteArray))
+	}
+
 	return nil
 }
 
 const umlTemplate = `
 @startuml
-title Sample ERDiagram
+title ER Diagram
 {{range . -}}
 entity "{{.Name}}" {
 {{range .IDColumns -}}

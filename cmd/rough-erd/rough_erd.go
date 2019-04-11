@@ -23,7 +23,7 @@ func main() {
 			Usage:   "make ER diagram.",
 			Flags: []cli.Flag{
 				cli.StringFlag{
-					Name:  "databasetype",
+					Name:  "dbtype",
 					Value: "mysql",
 					Usage: "database type",
 				},
@@ -47,15 +47,21 @@ func main() {
 					Name:  "name, n",
 					Usage: "database name",
 				},
+				cli.StringFlag{
+					Name:  "output, o",
+					Value: "text",
+					Usage: "output style [text, url, png, svg] ",
+				},
 			},
 			Action: func(c *cli.Context) error {
 				o := &rough_erd.Option{
-					Database: c.String("databasetype"),
+					Database: c.String("dbtype"),
 					User:     c.String("user"),
 					Password: c.String("password"),
 					Port:     c.Int("port"),
 					Protocol: c.String("protocol"),
 					Name:     c.String("name"),
+					Output:   c.String("output"),
 				}
 				return rough_erd.Run(o)
 			},
