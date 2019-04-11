@@ -1,9 +1,13 @@
 # rough-erd
-This tool creates a rough ER diagram.  
-This tool uses the ID to create a UML. (Not use FOREIGN KEY)
+This tool creates a rough ER Diagram.  
+This tool uses the ID to create a ERD. (Not use FOREIGN KEY)
 
+## Sample UML
 ![uml.png](https://github.com/nesheep5/rough-erd/blob/master/example/uml.png)
 
+## Relation Role
+This tool uses the ID to relate.
+Example, `saralies` table has `employee_id`, `saralies` related `employees`. (join `employees.id = saralies.employee_id`)
 
 ## Install
 ```bash
