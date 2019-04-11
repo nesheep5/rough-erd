@@ -1,6 +1,6 @@
 # rough-erd
 This tool creates a rough ER Diagram.  
-This tool uses the ID to create a ERD. (Not use FOREIGN KEY)
+This tool uses the ID to create a ERD. (Not use FOREIGN KEY)  
 This tool can make UML text(plantUml format), PNG, SVG.
 
 ## Sample UML
