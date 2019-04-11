@@ -5,7 +5,7 @@ This tool uses the ID to create a UML. (Not use FOREIGN KEY)
 
 ## Install
 ```bash
-go get -u github.com/nesheep5/rough-erd
+go get -u github.com/nesheep5/rough-erd/cmd/rough-erd
 ```
 
 ## Usage
