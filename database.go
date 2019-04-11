@@ -24,6 +24,7 @@ type DatabaseSchemaConfig struct {
 type ConnectInfo struct {
 	User     string
 	Password string
+	Host     string
 	Port     int
 	Protocol string
 	DBName   string

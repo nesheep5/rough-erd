@@ -27,7 +27,7 @@ func MysqlDatabase(c *ConnectInfo) (Database, error) {
 			User:                 c.User,
 			Passwd:               c.Password,
 			Net:                  c.Protocol,
-			Addr:                 fmt.Sprintf("127.0.0.1:%d", c.Port),
+			Addr:                 fmt.Sprintf("%s:%d", c.Host, c.Port),
 			DBName:               c.DBName,
 			AllowNativePasswords: true,
 		},

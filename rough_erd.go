@@ -17,6 +17,7 @@ type Option struct {
 	Database string
 	User     string
 	Password string
+	Host     string
 	Port     int
 	Protocol string
 	Name     string
@@ -29,6 +30,7 @@ func Run(option *Option) error {
 	conn := &ConnectInfo{
 		User:     option.User,
 		Password: option.Password,
+		Host:     option.Host,
 		Port:     option.Port,
 		Protocol: option.Protocol,
 		DBName:   option.Name,
@@ -52,7 +54,7 @@ func Run(option *Option) error {
 		fmt.Println("-----------------------------")
 	case "url":
 		encoded := encodeAsTextFormat([]byte(umlText))
-		fmt.Println("Open → " + PlantUmlServerURL + "/umlText/" + encoded)
+		fmt.Println("Open → " + PlantUmlServerURL + "/uml/" + encoded)
 	case "png":
 		encoded := encodeAsTextFormat([]byte(umlText))
 		resp, _ := http.Get(PlantUmlServerURL + "/png/" + encoded)

@@ -35,8 +35,14 @@ func main() {
 					Name:  "password, p",
 					Usage: "database password",
 				},
+				cli.StringFlag{
+					Name:  "host, H",
+					Value: "127.0.0.1",
+					Usage: "database host",
+				},
 				cli.IntFlag{
 					Name:  "port, P",
+					Value: 3306,
 					Usage: "database port",
 				},
 				cli.StringFlag{
