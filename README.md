@@ -1,15 +1,24 @@
 # rough-erd
-This tool creates a rough ER diagram.  
-This tool uses the ID to create a UML. (Not use FOREIGN KEY)
+This tool creates a rough ER Diagram.  
+It uses the ID to create a ERD. (Not using FOREIGN KEY)  
+It can make ERD Text([PlantUml](http://plantuml.com) Format), PNG, SVG, and [online editor](http://www.plantuml.com/plantuml/) URL.
+
+## Sample ERD
 ![uml.png](https://github.com/nesheep5/rough-erd/blob/master/example/uml.png)
+
+## Relation Role
+This tool uses the ID to relate.  Not using FOREIGN KEY.
+Example, `salaries` table has `employee_id`, `salaries` related `employees`.   
+(example sql:  `SELECT * FROM employees JOIN salaries ON employees.id = salaries.employee_id;`)
 
 ## Install
 ```bash
-go get -u github.com/nesheep5/rough-erd
+go get -u github.com/nesheep5/rough-erd/cmd/rough-erd
 ```
 
 ## Usage
 ```bash
+> rough-erd -h
 NAME:
    rough-erd - This tool creates a rough ER diagram.
 
@@ -29,6 +38,7 @@ GLOBAL OPTIONS:
 ```
 ### make command
 ```bash
+> rough-erd make -h
 NAME:
    rough_erd make - make ER diagram.
 
@@ -47,6 +57,7 @@ OPTIONS:
 ```
 
 ## Example
+https://github.com/nesheep5/rough-erd/tree/master/example
 ### Run TestDB
 ```bash
 > cd $[GOPATH]/src/github.com/nesheep5/rough-erd/example
