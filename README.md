@@ -7,8 +7,8 @@ This tool uses the ID to create a ERD. (Not use FOREIGN KEY)
 
 ## Relation Role
 This tool uses the ID to relate.  
-Example, `saralies` table has `employee_id`, `saralies` related `employees`.   
-(join `employees.id = saralies.employee_id`)
+Example, `salaries` table has `employee_id`, `salaries` related `employees`.   
+(example sql:  `SELECT * FROM employees JOIN salaries ON employees.id = salaries.employee_id;`)
 
 ## Install
 ```bash
