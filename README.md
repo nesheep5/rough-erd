@@ -7,7 +7,7 @@ It can make ERD Text([PlantUml](http://plantuml.com) Format), PNG, and SVG.
 ![uml.png](https://github.com/nesheep5/rough-erd/blob/master/example/uml.png)
 
 ## Relation Role
-This tool uses the ID to relate.  
+This tool uses the ID to relate.  Not using FOREIGN KEY.
 Example, `salaries` table has `employee_id`, `salaries` related `employees`.   
 (example sql:  `SELECT * FROM employees JOIN salaries ON employees.id = salaries.employee_id;`)
 
