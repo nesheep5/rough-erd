@@ -96,7 +96,6 @@ mysql> show tables;
 ### make UML Text
 ```bash
 > rough_erd make -P 23306 -u root -p rough-erd -protocol tcp -n test -o text
------------------------------
 
 @startuml
 title ER Diagram
@@ -132,7 +131,6 @@ salaries -- employees :employee_id
 titles -- employees :employee_id
 @enduml
 
------------------------------
 ```
 
 ### make UML URL
