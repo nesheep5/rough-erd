@@ -18,6 +18,7 @@ go get -u github.com/nesheep5/rough-erd/cmd/rough-erd
 
 ## Usage
 ```bash
+rough-erd -h
 NAME:
    rough-erd - This tool creates a rough ER diagram.
 
@@ -37,6 +38,7 @@ GLOBAL OPTIONS:
 ```
 ### make command
 ```bash
+> rough-erd make -h
 NAME:
    rough_erd make - make ER diagram.
 
