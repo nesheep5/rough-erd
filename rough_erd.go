@@ -8,9 +8,7 @@ import (
 )
 
 const (
-	DataSourceMySQL      = "mysql"
-	DataSourcePostgreSQL = "postgres"
-	mapper               = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_"
+	mapper = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_"
 )
 
 type Option struct {
@@ -39,7 +37,7 @@ func Run(option *Option) error {
 	if err != nil {
 		return err
 	}
-	uml := makePruntUml(tables)
+	uml := makeUmlText(tables)
 	//fmt.Println("-----------------------------")
 	//fmt.Println(uml)
 	//fmt.Println("-----------------------------")
@@ -69,7 +67,7 @@ entity "{{.Name}}" {
 @enduml
 `
 
-func makePruntUml(tables []*Table) string {
+func makeUmlText(tables []*Table) string {
 	tmpl, err := template.New("uml").Parse(umlTemplate)
 	if err != nil {
 		panic(err)
@@ -84,7 +82,7 @@ func makePruntUml(tables []*Table) string {
 
 func encodeAsTextFormat(raw []byte) string {
 	compressed := deflate(raw)
-	return base64_encode(compressed)
+	return base64Encode(compressed)
 }
 
 func deflate(input []byte) []byte {
@@ -95,7 +93,7 @@ func deflate(input []byte) []byte {
 	return b.Bytes()
 }
 
-func base64_encode(input []byte) string {
+func base64Encode(input []byte) string {
 	var buffer bytes.Buffer
 	inputLength := len(input)
 	for i := 0; i < 3-inputLength%3; i++ {
